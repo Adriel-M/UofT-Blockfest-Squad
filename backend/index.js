@@ -32,18 +32,6 @@ router.route('/scrape/:url')
         res.send('Finished Scraping ' + req.params.url + ' at time ' + time.toString())
     });
 
-router.route('/example')
-    .get(function(req,res) {
-        ipfs.files.cat("Qmcy3yKqNiEVxX9C5jhsLZw3h1QaEtQwbh6EXh4kxvUmW2" + "/index.html", function (err, file) {
-            if (err) {
-              throw err
-            }
-            console.log(file.toString('utf8'));
-            res.end(file.toString('utf8'));
-        
-          })
-        
-    })
 
 router.route('/address/:address_id/:file')
     .get(function(req, res) {

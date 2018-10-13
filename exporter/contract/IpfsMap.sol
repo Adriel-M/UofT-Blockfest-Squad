@@ -1,6 +1,6 @@
 pragma solidity ^0.4.7;
 
-contract ipfsMap {
+contract IpfsMap {
     struct ipfsEntry {
             uint64 time;
             string ipfsLocation;

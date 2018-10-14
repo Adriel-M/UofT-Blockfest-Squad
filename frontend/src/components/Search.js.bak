@@ -1,0 +1,73 @@
+import React, { Component } from 'react';
+import {
+  Container, Col, Form,
+  FormGroup, Label, Input,
+  Button,
+} from 'reactstrap';
+const axios = require('axios');
+
+export default class Search extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {url: '' , entries: []}
+    this.scrape = this.scrape.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.explore = this.explore.bind(this);
+  }
+
+  onFormChange(event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  handleChange(event) {
+    this.setState({url: event.target.value });
+  }
+
+  scrape() {
+    this.props.setUrl(this.state.url);
+    this.props.setViewId(true);
+  }
+
+  explore(){
+    console.log('exploring')
+    console.log(this.state.url)
+    //send url
+    this.props.setUrl(this.state.url);
+    //grab entries
+    this.setState({entries: axios.get(this.state.url)});
+    //send entries
+    this.props.setEntries(this.state.entries);
+  }
+
+  render() {
+
+    return (
+      <div>
+        <div>
+        <h2> Way Back Machine </h2>
+        </div>
+        <form onSubmit={this.onFormChange}>
+        <div className="form-group">
+          <input className="" type="text" name="url" onChange={this.handleChange}></input>
+          <button type="submit" onClick={this.explore}> Explore </button>
+          <button type="submit" onClick={this.scrape}> Scrape </button>
+          </div>
+        </form>
+      </div>
+
+    )
+  }
+
+
+  //   try {
+  //     let value = axios.get(this.state.value);
+  //     this.setState({
+  //       something: value.something,
+  //     })
+  //   }
+  //   catch(error) {
+  //       console.error(error);
+  //   }
+  // }
+}

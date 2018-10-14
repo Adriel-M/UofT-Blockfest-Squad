@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 
 import Search from './Search';
 import SnapshotListing from './SnapshotListing';
-// import SnapshotList from './SnapshotList';
-// import HeadNav0 from './HeadNav0';
-import NavBar from './NavBar'
+import NavBar from './NavBar';
+import ViewUrl from './ViewUrl';
 
 export default class App extends Component {
   constructor(props) {
@@ -26,12 +25,12 @@ export default class App extends Component {
   setIpfsAddress(ipfsAddress) {
     this.setState({
       ipfsAddress,
-    })
+    });
   }
 
   renderPage() {
     if (this.state.ipfsAddress) {
-        // noop
+        return <ViewUrl ipfsAddress={this.state.ipfsAddress} />
     } else if (this.state.url) {
         return <SnapshotListing url={this.state.url} setIpfsAddress={this.setIpfsAddress} />
     } else {

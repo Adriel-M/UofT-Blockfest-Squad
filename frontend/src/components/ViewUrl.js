@@ -1,12 +1,9 @@
-import React, { Component } from 'react';
-
-
-export default class Search extends Component {
-  constructor(props)
-  {
-    this.state = {url:''}
-  }
-  return (
-    <iframe url='this.state.url' width="450px" height="450px"> </iframe>
+import React from 'react';
+import { Jumbotron } from 'react-bootstrap';
+const BACKEND_URL = 'https://localhost:3000';
+export default function(props) {
+    const iframeSrc = `${BACKEND_URL}/address/${props.ipfsAddress}`;
+    return (
+        <iframe src={iframeSrc} />
     )
 }

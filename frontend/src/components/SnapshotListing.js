@@ -27,7 +27,7 @@ export default class SnapshotListing extends Component {
         const dt = new Date(0);
         dt.setUTCSeconds(entry.time);
         return (
-            <ListGroupItem href="#" onClick={() => this.props.setIpfsAddress(entry.ipfs)}>{dt.toString()}</ListGroupItem>
+            <ListGroupItem onClick={() => { this.props.setIpfsAddress(entry.ipfs)}} key={entry.ipfs}>{dt.toString()}</ListGroupItem>
         )
     }
 

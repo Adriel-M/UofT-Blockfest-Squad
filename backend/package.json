@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
+    "ipfs-api": "^24.0.2",
     "node-datetime": "^2.1.2"
   }
 }

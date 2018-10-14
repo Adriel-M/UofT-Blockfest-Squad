@@ -13,13 +13,13 @@ export default class SnapshotListing extends Component {
         this.state = {
             entries: [{time: 1, ipfs: '123'}, {time: 2, ipfs: '14'}]
         }
-        //    axios.post(`${BACKEND_URL}/explore`, {
-        //        url: this.props.url,
-        //    }).then(function(response) {
-        //        this.setState({
-        //            entries: response.data,
-        //        });
-        //    });
+        axios.post(`${BACKEND_URL}/explore`, {
+            url: this.props.url,
+        }).then(function(response) {
+            this.setState({
+                entries: response.data,
+            });
+        });
         this.generateListEntry = this.generateListEntry.bind(this);
     }
 

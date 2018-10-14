@@ -41,11 +41,11 @@ router.route('/explore')
 
             var snaps = []
             for(i = 0; i < numEntries; i++) {
-                time = await contract.methods.getEntryOfSiteTime(accounts[0], url, i).call({
+                var time = await contract.methods.getEntryOfSiteTime(accounts[0], url, i).call({
                     from: accounts[0],
                     gas: '1000000',
                 });
-                ipfs = await contract.methods.getEntryOfSiteLocation(accounts[0], url, i).call({
+                var ipfs = await contract.methods.getEntryOfSiteLocation(accounts[0], url, i).call({
                     from: accounts[0],
                     gas: '1000000',
                 });

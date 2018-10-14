@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { Jumbotron, Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 import axios from 'axios';
 
+const SCRAPE_URL = "http://localhost:3002";
 const BACKEND_URL = "http://localhost:3000";
+
 
 const FieldGroup = ({ id, label, help, ...props }) => {
   return (
@@ -31,15 +33,33 @@ export default class Search extends Component {
     }
 
     handleScrape(event) {
-        axios.post(`{BACKEND_URL}/scrape`, {
-            url: this.state.url
+        const self = this;
+        axios.post(`${SCRAPE_URL}/scrape`, {
+            url: self.state.url
         }).then(function(response) {
-            this.props.setIpfsAddress(response.data);
+            self.props.setIpfsAddress(response.data);
         });
     }
 
     handleSubmit(event) {
-        this.props.setUrl(this.state.url);
+        const self = this;
+        if (this.state.url) {
+            axios.post(`${BACKEND_URL}/explore`, {
+                url: self.state.url,
+            }).then(function(response) {
+                console.log('set');
+                try {
+                    self.props.setEntries(response.data);
+                    self.props.setUrl(self.state.url);
+
+
+
+
+                } catch (e) {
+                    console.log(e);
+                }
+            })
+        }
         event.preventDefault();
         event.stopPropagation();
     }

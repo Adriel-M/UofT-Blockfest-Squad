@@ -11,9 +11,11 @@ export default class App extends Component {
     this.state = {
       url: '',
       ipfsAddress: '',
+      entries: [],
     }
     this.setUrl = this.setUrl.bind(this);
     this.setIpfsAddress = this.setIpfsAddress.bind(this);
+    this.setEntries = this.setEntries.bind(this);
   }
 
   setUrl(url) {
@@ -28,13 +30,20 @@ export default class App extends Component {
     });
   }
 
+  setEntries(entries) {
+    console.log('new entries', entries)
+    this.setState({
+      entries,
+    })
+  }
+
   renderPage() {
     if (this.state.ipfsAddress) {
         return <ViewUrl ipfsAddress={this.state.ipfsAddress} />
     } else if (this.state.url) {
-        return <SnapshotListing url={this.state.url} setIpfsAddress={this.setIpfsAddress} />
+        return <SnapshotListing url={this.state.url} setIpfsAddress={this.setIpfsAddress} entries={this.state.entries}/>
     } else {
-        return <Search setUrl={this.setUrl} setIpfsAddress={this.setIpfsAddress} />
+        return <Search setUrl={this.setUrl} setIpfsAddress={this.setIpfsAddress} setEntries={this.setEntries}/>
     }
   }
 

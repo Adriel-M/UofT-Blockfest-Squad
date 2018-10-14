@@ -1,4 +1,4 @@
-const HDWalletProvider = require('truffle-hd-wallet-provider');
+const HDWalletProvider = require('truffle-hdwallet-provider');
 const Web3 = require('web3');
 const { interface, bytecode } = require('./compile');
 const secrets = require('./secrets');

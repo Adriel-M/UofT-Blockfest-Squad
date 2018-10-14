@@ -11,10 +11,12 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
+    "ganache-cli": "^6.1.8",
+    "ipfs-api": "^24.0.2",
+    "lodash": "^4.17.11",
     "node-datetime": "^2.1.2",
     "phantom": "^6.0.3",
-    "webpage": "^0.3.0"
-    "ipfs-api": "^24.0.2",
-    "node-datetime": "^2.1.2"
+    "truffle-hdwallet-provider": "0.0.3",
+    "web3": "^1.0.0-beta.36"
   }
 }

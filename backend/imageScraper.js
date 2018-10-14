@@ -8,7 +8,7 @@ page.open('http://google.com', function(status) {
     var imgSrcs = [];
 
     for (var i = 0; i < imgs.length; i++) {
-        imgSrcs.push(imgs[i].src);
+        imgSrcs.push(imgs[i].getAttribute('src'));
     }
 
     return imgSrcs;

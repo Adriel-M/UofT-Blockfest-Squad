@@ -11,7 +11,6 @@ const provider = new HDWalletProvider(
     secrets.wallet,
     secrets.infuraApi,
 );
-
 const web3 = new Web3(provider);
 
 const app = express();
@@ -31,16 +30,16 @@ app.use('/', router);
 
 router.route('/explore')
     .post(async function(req, res) {
-            url = req.body.url;
-            accounts = await web3.eth.getAccounts();
+            var url = req.body.url;
+            var accounts = await web3.eth.getAccounts();
             console.log("Starting connection with blockchain to retrieve " + url)
-            console.log("Account used: " + accounts)
+            console.log("Account used: " + accounts[0])
             const numEntries = await contract.methods.getNumberOfEntriesForSite(accounts[0], url).call({
                 from: accounts[0],
                 gas: '1000000',
             });
-            console.log(numEntries)
-            snaps = []
+
+            var snaps = []
             for(i = 0; i < numEntries; i++) {
                 time = await contract.methods.getEntryOfSiteTime(accounts[0], url, i).call({
                     from: accounts[0],
@@ -50,28 +49,24 @@ router.route('/explore')
                     from: accounts[0],
                     gas: '1000000',
                 });
-                console.log(time)
-                console.log(ipfs)
                 snaps.push({"time":time, "ipfs":ipfs})
             }
-            _.orderBy(snaps, ['time'], ['desc']);
-            console.log(snaps)
-            res.send(snaps)
+            var sortedSnaps = _.orderBy(snaps, ['time'], ['desc']);
+            console.log(sortedSnaps)
+            res.send(sortedSnaps)
     });
-
 
 router.route('/scrape/:url')
     .post(function(req, res) {
         ipfs.util.addFromFs('testFolder', { recursive: true }, (err, result) => {
             if (err) { throw err }
             console.log(result)
-        })
+        });
         
         var dt = dateTime.create();
         var time = dt.format('Y-m-d H:M:S');
         res.send('Finished Scraping ' + req.params.url + ' at time ' + time.toString())
     });
-
 
 router.route('/address/:address_id/:file')
     .get(function(req, res) {
@@ -81,10 +76,8 @@ router.route('/address/:address_id/:file')
               throw err
             }
             res.end(file);
-        
-          })
-
-    })
+          });
+    });
 
 router.route('/address/:address_id')
     .get(function(req, res) {
@@ -93,10 +86,7 @@ router.route('/address/:address_id')
               throw err
             }
             res.end(file);
-        
-          })
+          });
+    });
 
-    })
-
-
-app.listen(3000, () => console.log('App listening to 3000'));
+app.listen(3000, () => console.log('Backend listening to 3000'));

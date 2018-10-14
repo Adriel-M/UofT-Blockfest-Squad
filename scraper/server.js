@@ -6,12 +6,10 @@ const secrets = require('./secrets');
 
 const HDWalletProvider = require('truffle-hdwallet-provider');
 const Web3 = require('web3');
-
 const provider = new HDWalletProvider(
     secrets.wallet,
     secrets.infuraApi,
 );
-
 const web3 = new Web3(provider);
 
 const app = express();
@@ -22,7 +20,6 @@ var ipfs = ipfsAPI('/ip4/127.0.0.1/tcp/5001')
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json()); 
-// parse application/json
 
 app.use('/', router);
 
@@ -41,7 +38,7 @@ router.route('/scrape')
                 from: accounts[0],
                 gas: '1000000',
             });
-        })
-    })
+        });
+    });
 
-app.listen(3002, () => console.log("Scraper listening"))
+app.listen(3002, () => console.log("Scraper listening to 3002"))

@@ -11,7 +11,7 @@ export default class SnapshotListing extends Component {
             entries: [],
         };
         this.state = {
-            entries: [{time: 1, ipfs: '123'}, {time: 2, ipfs: '14'}]
+            entries: []
         }
         axios.post(`${BACKEND_URL}/explore`, {
             url: this.props.url,
